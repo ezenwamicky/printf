@@ -1,0 +1,1 @@
+Printf project. My partner, Micky and I are working on this project and the pushes must not be more than 60/40 to pass this project. This printf function is supposed to work the same way the orintf function in the stdio header file works.
