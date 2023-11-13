@@ -1,43 +1,5 @@
 #include "main.h"
 /**
- *handlechar - handles characters variables
- *@args : variable arguments
- *@charcount : arguments count variable
- */
-void handlechar(va_list args, int *charcount)
-{
-	char c = va_arg(args, int);
-
-	putchar(c);
-	(*charcount)++;
-}
-/**
- *handlestring - handles string of characters variables
- *@args : variable arguments
- *@charcount : arguments count variable
- */
-void handlestring(va_list args, int *charcount)
-{
-	char *str = va_arg(args, char *);
-
-	while (*str != '\0')
-	{
-		putchar(*str);
-		str++;
-		(*charcount)++;
-	}
-}
-/**
- *handlepercent - handles percrnt placeholder variables
- *@charcount : arguments count variable
- */
-void handlepercent(int *charcount)
-{
-	putchar('%');
-	(*charcount)++;
-}
-
-/**
  *_printf - prints formatted output to stdout.
  *@format: Format string containing format specifiers.
  *@...: variable number of arguments corresponding to format specifiers
@@ -45,44 +7,41 @@ void handlepercent(int *charcount)
  */
 int _printf(const char *format, ...)
 {
-	int charcount = 0;
+	int i = 0, count = 0;
 
 	va_list args;
 
 	va_start(args, format);
-
-	for (; *format != '\0'; format++)
+	while (format && format[i])
 	{
-		if (*format == '%')
+		if (format[i] == '%')
 		{
-			format++;
-
-			switch (*format)
+			i++;
+			if (format[i] == 'c')
 			{
-				case 'c':
-				handlechar(args, &charcount);
-				break;
-
-				case 's':
-				handlestring(args, &charcount);
-				break;
-
-				case '%':
-				handlepercent(&charcount);
-				break;
-
-				default:
-				putchar(*format);
-				charcount++;
-				break;
+				char c = va_arg(args, int);
+				write(1. &c, 1);
+				count++;
 			}
-		}
-		else
-		{
-			putchar(*format);
-			charcount++;
+			else if (format[i] == 's')
+			{
+				char *s = va_arg(args, char *);
+				while (*s)
+				{
+					write(1, s, 1);
+					s++;
+					count++;
+				}
+			}
+			else if (format[i] =='%')
+			{
+				write(1, "%", 1);
+				count++;
+			}
+			i++;
 		}
 	}
 	va_end(args);
-	return (charcount);
+
+	return (count);
 }
