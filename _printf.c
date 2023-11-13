@@ -7,43 +7,67 @@
  */
 int _printf(const char *format, ...)
 {
-	int i = 0, count = 0;
-
+	int charcount = 0;
 	va_list args;
 
 	va_start(args, format);
-	while (format && format[i])
+
+
+	while (*format != '\0')
 	{
-		if (format[i] == '%')
-		{
-			i++;
-			if (format[i] == 'c')
-			{
-				char c = va_arg(args, int);
+		if (*format == '%')
+        {
+            format++;
 
-				write(1, &c, 1);
-				count++;
-			}
-			else if (format[i] == 's')
-			{
-				char *s = va_arg(args, char *);
 
-				while (*s)
-				{
-					write(1, s, 1);
-					s++;
-					count++;
-				}
-			}
-			else if (format[i] == '%')
-			{
-				write(1, "%", 1);
-				count++;
-			}
-			i++;
-		}
-	}
-	va_end(args);
+            if (*format == '\0')
+            {
+                fprintf(stderr, "Error: Incomplete format specifier\n");
+                va_end(args);
+                return -1; 
+            }
 
-	return (count);
+            switch (*format)
+            {
+            case 'c':
+            {
+                char c = va_arg(args, int);
+                putchar(c);
+                charcount++;
+                break;
+            }
+            case 's':
+            {
+                char *str = va_arg(args, char *);
+                if (str == NULL)
+                    str = "(null)";
+                while (*str != '\0')
+                {
+                    putchar(*str);
+                    str++;
+                    charcount++;
+                }
+                break;
+            }
+            case '%':
+                putchar('%');
+                charcount++;
+                break;
+            default:
+                fprintf(stderr, "Error: Unsupported format specifier %%%c\n", *format);
+                va_end(args);
+                return -1;
+            }
+        }
+        else
+        {
+            putchar(*format);
+            charcount++;
+        }
+
+        format++;
+    }
+
+    va_end(args);
+    return charcount;
 }
