@@ -23,9 +23,7 @@ int _printf(const char *format, ...)
 			}
 			else if (*format == 's')
 			{
-				char *str = va_arg(args, char *);
-
-				count += handle_str(str);
+				count += print_str(args);
 			}
 			else if (*format == '%')
 			{
@@ -33,7 +31,7 @@ int _printf(const char *format, ...)
 			}
 			else
 			{
-				print_str("unidentified format\n");
+				_putchar_str("unidentified format\n");
 				return (-1);
 			}
 		}

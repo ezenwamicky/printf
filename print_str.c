@@ -1,16 +1,17 @@
 #include "main.h"
 /**
- * print_str - prints string count of characters to stdout
- *@str: string to be printed
- *Return: always the number of string count
+ *print_str - prints a string
+ *@args : va_list containing the string to be printed
+ *Return: number of character printed
  */
-int print_str(const char *str)
+int print_str(va_list args)
 {
 	int count = 0;
+	char *str = va_arg(args, char *);
 
 	if (str == NULL)
 	{
-		write(1, "(null)", 6);
+		_putchar_str("(null)");
 		return (6);
 	}
 
