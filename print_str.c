@@ -4,9 +4,15 @@
  *@str: string to be printed
 Return: number of count
  */
-int print_str(char *str)
+int print_str(const char *str)
 {
 	int count = 0;
+
+	if (str == NULL)
+	{
+		printf("(null)");
+		return 6;
+	}
 
 	while (*str != '\0')
 	{

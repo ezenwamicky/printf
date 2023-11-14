@@ -27,7 +27,7 @@ int _printf(const char *format, ...)
 			{
 				char *str = va_arg(args, char *);
 
-				count += print_str(str);
+				count += handle_str(str);
 			}
 			else if (*format == '%')
 			{
