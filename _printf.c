@@ -12,62 +12,56 @@ int _printf(const char *format, ...)
 
 	va_start(args, format);
 
-
 	while (*format != '\0')
 	{
 		if (*format == '%')
-        {
-            format++;
+		{
+			format++;
 
+			if (*format == '\0')
+			{
+				va_end(args);
+				return (-1);
+			}
+			switch (*format)
+			{
+				case 'c':
+					{
+						char c = va_arg(args, int);
 
-            if (*format == '\0')
-            {
-                fprintf(stderr, "Error: Incomplete format specifier\n");
-                va_end(args);
-                return -1; 
-            }
+						putchar (c);
+						break;
+					}
+				case 's':
+					{
+						char *str = va_arg(args, char *);
 
-            switch (*format)
-            {
-            case 'c':
-            {
-                char c = va_arg(args, int);
-                putchar(c);
-                charcount++;
-                break;
-            }
-            case 's':
-            {
-                char *str = va_arg(args, char *);
-                if (str == NULL)
-                    str = "(null)";
-                while (*str != '\0')
-                {
-                    putchar(*str);
-                    str++;
-                    charcount++;
-                }
-                break;
-            }
-            case '%':
-                putchar('%');
-                charcount++;
-                break;
-            default:
-                fprintf(stderr, "Error: Unsupported format specifier %%%c\n", *format);
-                va_end(args);
-                return -1;
-            }
-        }
-        else
-        {
-            putchar(*format);
-            charcount++;
-        }
-
-        format++;
-    }
-
-    va_end(args);
-    return charcount;
+						if (str == NULL)
+							str = "(null)";
+						while (*str != '\0')
+						{
+							putchar (*str);
+							str++;
+						}
+						break;
+					}
+				case '%':
+					putchar('%');
+					break;
+				default:
+					fprintf(stderr,"%%%c", *format);
+					va_end(args);
+					return (-1);
+			}
+			charcount++;
+		}
+		else
+		{
+			putchar(*format);
+			charcount++;
+		}
+		format++;
+	}
+	va_end(args);
+	return (charcount);
 }
