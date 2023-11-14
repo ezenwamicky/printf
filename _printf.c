@@ -19,9 +19,7 @@ int _printf(const char *format, ...)
 			format++;
 			if (*format == 'c')
 			{
-				char s = va_arg(args, int);
-
-				count += _putchar(s);
+				count += print_char(args);
 			}
 			else if (*format == 's')
 			{
