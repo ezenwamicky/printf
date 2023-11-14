@@ -1,8 +1,8 @@
 #include "main.h"
 /**
- *print_str - prints a string of characters to stdout
+ * print_str - prints string count of characters to stdout
  *@str: string to be printed
-Return: number of count
+ *Return: always the number of string count
  */
 int print_str(const char *str)
 {
@@ -10,8 +10,8 @@ int print_str(const char *str)
 
 	if (str == NULL)
 	{
-		printf("(null)");
-		return 6;
+		write(1, "(null)", 6);
+		return (6);
 	}
 
 	while (*str != '\0')
