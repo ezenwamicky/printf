@@ -17,11 +17,6 @@ int _printf(const char *format, ...)
 		if (*format == '%')
 		{
 			format++;
-			if (*format == '\0')
-			{fprintf(stderr, "Error: Incomplete format specifier");
-				va_end(args);
-				return (-1);
-			}
 			switch (*format)
 			{
 			case 'c':
@@ -29,6 +24,10 @@ int _printf(const char *format, ...)
 				break;
 			case 's':
 				count += print_str(args);
+				break;
+			case 'd':
+			case 'i':
+				count += print_int(args);
 				break;
 			case '%':
 				count += _putchar('%');
