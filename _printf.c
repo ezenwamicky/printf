@@ -33,7 +33,7 @@ int _printf(const char *format, ...)
 				count += _putchar('%');
 				break;
 			default:
-				fprintf(stderr, "Error: unidentified format specifier%%%c\n", *format);
+				fprintf(stderr, "%%%c", *format);
 				va_end(args);
 				return (-1);
 			}

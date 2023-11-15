@@ -12,5 +12,5 @@ int print_int(va_list args)
 
 	_putchar_str(buffer);
 
-	return length;
+	return (length);
 }

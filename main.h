@@ -7,7 +7,7 @@
 #define UNUSED(x) (void)(x)
 #define BUFF_SIZE 1024
 
-
+int print_bin(const char *format, ...);
 int _putchar(char c);
 int print_str(va_list args);
 int _putchar_str(const char *str);
