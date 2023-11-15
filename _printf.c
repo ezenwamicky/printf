@@ -17,6 +17,13 @@ int _printf(const char *format, ...)
 		if (*format == '%')
 		{
 			format++;
+			if (*format == '\0')
+			{
+				_putchar_str("Error: Incomplete format specifier\n");
+				va_end(args);
+				return (-1);
+			}
+
 			if (*format == 'c')
 			{
 				count += print_char(args);
@@ -32,6 +39,7 @@ int _printf(const char *format, ...)
 			else
 			{
 				_putchar_str("unidentified format\n");
+				va_end(args);
 				return (-1);
 			}
 		}
