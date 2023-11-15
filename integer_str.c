@@ -7,5 +7,5 @@
  */
 int integer_str(char *buffer, int num)
 {
-	return (snprintf(buffer, 12, "%d", num));
+	return (snprintf(buffer, BUFF_SIZE, "%d", num));
 }
