@@ -40,5 +40,9 @@ int main(void)
     printf("Len:[%d]\n", len2);
     _printf("Unknown:[%r]\n");
     printf("Unknown:[%r]\n");
+    _printf("This is %u test", 42);
+    _printf("Character: %c, String: %s, Percentage: %%", 'A', "Hello");
+    _printf("%%");
+    _printf("");
     return (0);
 }
