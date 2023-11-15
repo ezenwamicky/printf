@@ -18,26 +18,22 @@ int _printf(const char *format, ...)
 		{
 			format++;
 			if (*format == '\0')
-			{
-				_putchar_str("Error: Incomplete format specifier\n");
+			{_putchar_str("Error: Incomplete format specifier");
 				va_end(args);
 				return (-1);
 			}
-
-			if (*format == 'c')
+			switch (*format)
 			{
+			case 'c':
 				count += print_char(args);
-			}
-			else if (*format == 's')
-			{
+				break;
+			case 's':
 				count += print_str(args);
-			}
-			else if (*format == '%')
-			{
+				break;
+			case '%':
 				count += _putchar('%');
-			}
-			else
-			{
+				break;
+			default:
 				_putchar_str("unidentified format\n");
 				va_end(args);
 				return (-1);
